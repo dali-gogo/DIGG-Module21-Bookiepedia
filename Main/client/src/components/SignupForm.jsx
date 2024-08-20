@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
@@ -14,11 +14,17 @@ const SignupForm = () => {
     password: '',
   });
 
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+  const [addUser, { error }] = useMutation(ADD_USER);
+
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -28,7 +34,6 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -36,18 +41,13 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await createUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      const { data } = await addUser({
+        variables: { ...userFormData },
+      });
+      console.log(data);
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
     }
 
     setUserFormData({
@@ -105,7 +105,11 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+          disabled={
+            !(userFormData.username && 
+              userFormData.email && 
+              userFormData.password)
+            }
           type='submit'
           variant='success'>
           Submit
