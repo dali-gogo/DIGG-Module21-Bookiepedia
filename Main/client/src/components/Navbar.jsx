@@ -5,7 +5,6 @@ import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 
 import Auth from '../utils/auth';
-
 const AppNavbar = () => {
 
   const [showModal, setShowModal] = useState(false);
