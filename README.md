@@ -15,6 +15,11 @@ The following functionalities were given:
 - Create an Apollo Provider for requests to communicate with an Apollo Server.
 - Deploy the application to Render.
 
+## User Story
+AS AN avid reader
+I WANT to search for new books to read
+SO THAT I can keep a list of books to purchase
+
 ## Credits
 The starter code used was pulled from Boot Camp Spot, Bootcamp Code TDM-VIRT-FSF-PT-03-2024-U-LOLC-MTTH.
 
