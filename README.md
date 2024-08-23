@@ -6,7 +6,6 @@ Starter code was used to take a fully functioning Google Books API search engine
 
 ## Links
 - URL of the GitHub repository that contains the code: https://github.com/dali-gogo/DIGG-Module21-Bookiepedia
-- URL of the deployed application: dali-gogo.github.io/DIGG-Module21-Bookiepedia
 
 ## Usage
 The following functionalities were given:
@@ -25,5 +24,3 @@ The starter code used was pulled from Boot Camp Spot, Bootcamp Code TDM-VIRT-FSF
 
 ## License
 MIT License used for the corresponding repository.
-
-## Screenshots
